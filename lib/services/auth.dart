@@ -5,14 +5,13 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
 // create MyUser object based on User
-  MyUser? _userfromFirebase(User user) {
-    return MyUser(uid: user.uid);
+  MyUser? _userfromFirebase(User? user) {
+    return user != null ? MyUser(uid: user.uid) : null;
   }
 
+//auth change user stream
   Stream<MyUser?> get user {
-    return _auth
-        .authStateChanges()
-        .map((User? user) => _userfromFirebase(user!));
+    return _auth.authStateChanges().map(_userfromFirebase);
   }
 
   //sign in anonymously
@@ -32,4 +31,12 @@ class AuthService {
   //register with email and password
 
   //sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
