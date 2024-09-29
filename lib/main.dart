@@ -26,5 +26,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//import 'package:cloud_firestore/cloud_firestore.dart';

@@ -50,6 +50,9 @@ class _SignInState extends State<SignIn> {
                 children: <Widget>[
                   const SizedBox(height: 20.0),
                   TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter an email';
@@ -64,6 +67,9 @@ class _SignInState extends State<SignIn> {
                   ),
                   const SizedBox(height: 20.0),
                   TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                    ),
                     validator: (value) {
                       if (value == null || value.length < 6) {
                         return 'Please enter a password with 6+ characters';
@@ -84,7 +90,8 @@ class _SignInState extends State<SignIn> {
                         dynamic result = await _auth.signInWithEmailAndPassword(
                             email, password);
                         if (result == null) {
-                          setState(() => error = 'Could not sign in with those credentials');
+                          setState(() => error =
+                              'Could not sign in with those credentials');
                         }
                       }
                     },
