@@ -1,3 +1,4 @@
+import 'package:brew_crew/models/brew.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -12,13 +13,21 @@ class BrewList extends StatefulWidget {
 class _BrewListState extends State<BrewList> {
   @override
   Widget build(BuildContext context) {
-    final brews = Provider.of<QuerySnapshot?>(context);
-    //print(brews!.docs);
-    if (brews != null) {
-      for (var doc in brews.docs) {
-        print(doc.data());
-      }
-    }
-    return const Placeholder();
+    final brews = Provider.of<List<Brew>?>(context) ?? [];
+
+    return ListView.builder(
+      itemCount: brews.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: CircleAvatar(
+            radius: 25.0,
+            backgroundColor: Colors.brown[brews[index].strength],
+          ),
+          title: Text(brews[index].name),
+          subtitle: Text('Takes ${brews[index].sugars} sugar(s)'),
+          trailing: Text('${brews[index].strength}'),
+        );
+      },
+    );
   }
 }
