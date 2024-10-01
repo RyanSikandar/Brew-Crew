@@ -16,9 +16,9 @@ class _SettingsFormState extends State<SettingsForm> {
   final List<String> sugars = ['0', '1', '2', '3', '4'];
 
   //form values
-  String _currentName = '';
-  String _currentSugars = '';
-  int _currentStrength = 100;
+  String? _currentName;
+  String? _currentSugars;
+  int? _currentStrength;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +60,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       decoration: const InputDecoration(
                         hintText: 'Sugars',
                       ),
-                      value: _currentSugars.isEmpty
-                          ? userData?.sugars
-                          : _currentSugars,
+                      value: _currentSugars ?? userData?.sugars,
                       items: sugars.map((sugar) {
                         return DropdownMenuItem(
                           value: sugar,
@@ -95,9 +93,18 @@ class _SettingsFormState extends State<SettingsForm> {
                         backgroundColor: Colors.white,
                       ),
                       onPressed: () async {
-                        print(_currentName);
-                        print(_currentSugars);
-                        print(_currentStrength);
+                        if (_formKey.currentState!.validate()) {
+                          await DatabaseService(uid: user?.uid ?? '')
+                              .updateUserData(
+                                  _currentSugars ?? userData?.sugars ?? '0',
+                                  _currentName ??
+                                      userData?.name ??
+                                      'new crew member',
+                                  _currentStrength ??
+                                      userData?.strength ??
+                                      100);
+                          Navigator.pop(context);
+                        }
                       },
                       child: const Text(
                         'Update',
