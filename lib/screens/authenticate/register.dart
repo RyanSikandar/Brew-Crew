@@ -28,7 +28,10 @@ class _RegisterState extends State<Register> {
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
               elevation: 0.0,
-              title: const Text('Sign up to Brew Crew'),
+              title: const Text(
+                'Sign up to Brew Crew',
+                style: TextStyle(color: Colors.white),
+              ),
               actions: [
                 TextButton.icon(
                   onPressed: () async {
@@ -54,6 +57,9 @@ class _RegisterState extends State<Register> {
                     children: <Widget>[
                       const SizedBox(height: 20.0),
                       TextFormField(
+                        decoration: const InputDecoration(
+                          hintText: 'Email',
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter an email';
@@ -68,6 +74,9 @@ class _RegisterState extends State<Register> {
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
+                        decoration: const InputDecoration(
+                          hintText: 'Password',
+                        ),
                         validator: (value) {
                           if (value == null || value.length < 6) {
                             return 'Please enter a password with 6+ characters';

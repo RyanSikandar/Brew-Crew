@@ -29,7 +29,10 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
               elevation: 0.0,
-              title: const Text('Sign in to Brew Crew'),
+              title: const Text(
+                'Sign in to Brew Crew',
+                style: TextStyle(color: Colors.white),
+              ),
               actions: <Widget>[
                 TextButton.icon(
                   onPressed: () async {
