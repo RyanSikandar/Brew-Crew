@@ -34,7 +34,10 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
-          title: const Text('Brew Crew'),
+          title: const Text(
+            'Brew Crew',
+            style: TextStyle(color: Colors.white),
+          ),
           actions: <Widget>[
             TextButton.icon(
               onPressed: () async {
@@ -59,7 +62,15 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        body: const BrewList(),
+        body: Container(
+            //add background image
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/coffee_bg.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: const BrewList()),
       ),
     );
   }
